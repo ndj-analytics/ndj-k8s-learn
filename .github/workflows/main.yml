@@ -37,15 +37,23 @@ jobs:
         run: kubectl get pods -A
 
       - name: Deploy to Minikube
-        run: |
-          kubectl apply -f deployment.yml
-          kubectl apply -f service.yml
+        run: kubectl apply -f deployment.yml
 
       - name: Check for Deployements and Services
         run: |
           kubectl get deployments
           kubectl get pods
           kubectl get svc
+
+      - name: Wait for deployments to be ready
+        run: |
+          while [[ $(kubectl get deployments --output 'jsonpath={.items[*].status.readyReplicas}' | tr ' ' '\n' | paste -sd+ | bc) -ne 1 ]]; do
+            echo "Waiting for deployments to be ready..."
+            sleep 10
+          done
+
+      - name: Apply Service
+        run: kubectl apply -f service.yml
 
       - name: Test Service URLs
         run: |
