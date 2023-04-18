@@ -30,7 +30,7 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/deploy-app:${{ github.sha }}
 
       - name: Deploy to Kubernetes
-        uses: kodiidok/nodejs-k8s-learn1@master
+        uses: kodiidok/nodejs-k8s-learn1@main
         with:
           args: apply -f deployment.yaml,service.yaml
         env:
