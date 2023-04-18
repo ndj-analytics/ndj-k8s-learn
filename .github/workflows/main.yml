@@ -8,6 +8,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    name: build Node.js Docker Image and Deploy to minikube
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -29,9 +30,18 @@ jobs:
           docker tag deploy-app ${{ secrets.DOCKER_USERNAME }}/deploy-app:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USERNAME }}/deploy-app:${{ github.sha }}
 
-      - name: Deploy to Kubernetes
-        uses: kodiidok/nodejs-k8s-learn1@main
-        with:
-          args: apply -f /manifests/
-        env:
-          KUBECONFIG: ${{ secrets.KUBE_CONFIG }}
+      - name: Start minikube
+        uses: medyagh/setup-minikube@master
+
+      - name: Check for Clusters
+        run: kubectl get pods -A
+
+      - name: Deploy to Minikube
+        run: |
+          kubectl apply -f deployment.yml
+          kubectl apply -f service.yml
+
+      - name: Test Service URLs
+        run: |
+          minikube service list
+          minikube service deployment-nodeapp --url
