@@ -1,4 +1,4 @@
-name: Publish Docker Image to Registry
+name: Publish Docker Image to Registry and Deploy
 
 on:
   push:
@@ -28,3 +28,10 @@ jobs:
         run: |
           docker tag deploy-app ${{ secrets.DOCKER_USERNAME }}/deploy-app:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USERNAME }}/deploy-app:${{ github.sha }}
+
+      - name: Deploy to Kubernetes
+        uses: appleboy/kubectl-action@master
+        with:
+          args: apply -f deployment.yaml,service.yaml
+        env:
+          KUBECONFIG: ${{ secrets.KUBE_CONFIG }}
