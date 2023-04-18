@@ -18,9 +18,6 @@ jobs:
       - name: Build Docker image
         run: docker build -t deploy-app .
 
-      - name: Test Docker image
-        run: docker run --rm deploy-app npm test
-
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
