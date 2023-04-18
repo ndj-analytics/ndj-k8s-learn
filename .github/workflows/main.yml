@@ -32,6 +32,6 @@ jobs:
       - name: Deploy to Kubernetes
         uses: kodiidok/nodejs-k8s-learn1@main
         with:
-          args: kubectl apply -f /manifests/
+          args: apply -f /manifests/
         env:
           KUBECONFIG: ${{ secrets.KUBE_CONFIG }}
