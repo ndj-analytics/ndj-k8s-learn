@@ -8,6 +8,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    needs: publish
+    if: github.event.workflow_run.conclusion == 'success'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -17,4 +19,4 @@ jobs:
         with:
           args: apply -f deployment.yaml,service.yaml
         env:
-          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+          KUBECONFIG: ${{ secrets.KUBE_CONFIG }}
