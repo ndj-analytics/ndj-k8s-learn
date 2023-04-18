@@ -58,7 +58,10 @@ jobs:
       - name: Test Service URLs
         run: |
           minikube service list
+          kubectl expose deployment service-nodeapp --type=NodePort --port=3000 --name=service-nodeapp-ext --dry-run=client -o yaml | kubectl apply -f -
+          minikube service list
           minikube service service-nodeapp --url
+          minikube service service-nodeapp-3000 --url
 
       - name: Check for Deployements and Services
         run: |
