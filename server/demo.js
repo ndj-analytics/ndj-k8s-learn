@@ -53,7 +53,7 @@ app.use(express.json());
  * This code defines a route for the HTTP GET method at the path '/info'. When a client sends a GET request to this path, the server responds with a JSON object containing information about the chat microservice. The response has a status code of 200, indicating that the request was successful. 
  * */
 app.get('/info', (req, res) => {
-    res.status(200).json({info: 'This is a Chat Microservice built using the OpenAI API `createChatCompletion`'});
+    res.status(200).json({info: 'This is a ChatGPT Microservice built using the OpenAI API `createChatCompletion`'});
 });
 
 /**
