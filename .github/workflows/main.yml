@@ -51,3 +51,9 @@ jobs:
         run: |
           minikube service list
           minikube service service-nodeapp --url
+
+      - name: Check for Deployements and Services
+        run: |
+          kubectl get deployments
+          kubectl get pods
+          kubectl get svc
