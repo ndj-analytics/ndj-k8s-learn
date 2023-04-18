@@ -41,6 +41,12 @@ jobs:
           kubectl apply -f deployment.yml
           kubectl apply -f service.yml
 
+      - name: Check for Deployements and Services
+        run: |
+          kubectl get deployments
+          kubectl get pods
+          kubectl get svc
+
       - name: Test Service URLs
         run: |
           minikube service list
