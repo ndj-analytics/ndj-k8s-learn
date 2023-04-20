@@ -10,7 +10,7 @@ const app = express();
 /**
  * These lines of code are connecting to a MongoDB database using the `mongoose` library. The `mongoose.connect()` method is used to establish a connection to the MongoDB database specified in the `MONGO_URI` environment variable. The `useNewUrlParser` and `useUnifiedTopology` options are passed to the method to ensure that the connection is established using the latest MongoDB driver.
  * Once the connection is established, the `mongoose` library can be used to define and interact with database models. 
- * */
+ * */ 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -53,7 +53,7 @@ app.use(express.json());
  * This code defines a route for the HTTP GET method at the path '/info'. When a client sends a GET request to this path, the server responds with a JSON object containing information about the chat microservice. The response has a status code of 200, indicating that the request was successful. 
  * */
 app.get('/info', (req, res) => {
-    res.status(200).json({info: 'This is a ChatGPT Microservice built using the OpenAI API `createChatCompletion`'});
+    res.status(200).json({info: 'This is a Chat Microservice built using the OpenAI API `createChatCompletion`'});
 });
 
 /**

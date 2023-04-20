@@ -4,7 +4,7 @@ metadata:
   name: service-nodeapp
 spec:
   selector:
-    app: deploy-app
+    app: app-naveen
   type: LoadBalancer
   ports:
   - protocol: TCP

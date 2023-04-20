@@ -3,19 +3,19 @@ kind: Deployment
 metadata:
   name: deployment-nodeapp
   labels:
-    app: deploy-app
+    app: app-naveen
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: deploy-app
+      app: app-naveen
   template:
     metadata:
       labels:
-        app: deploy-app 
+        app: app-naveen 
     spec:
       containers:
       - name: nodeserver
-        image: kodiidok/deploy-app:latest
+        image: ndjanalytics/app-naveen:latest
         ports:
         - containerPort: 3000
